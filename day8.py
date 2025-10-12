@@ -88,7 +88,3 @@ def part2(coords, bound_x, bound_y):
 
 part1(*load_data())
 part2(*load_data())
-
-# x = 5
-# dx = -3
-# print((x // (-dx)))
