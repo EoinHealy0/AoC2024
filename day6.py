@@ -44,27 +44,29 @@ def part1():
 
 def part2():
     infinite_placements = 0
+    last_x, last_y = 0, 0
 
     for block_y in range(len(map)):
         for block_x in range(len(map[0])):
             if map[block_y][block_x] == '.':
-                current_map = copy.deepcopy(map)
-                current_map[block_y][block_x] = '#'
+                map[block_y][block_x] = '#'
+                map[last_y][last_x] = '.'
+                last_x, last_y = block_x, block_y
 
                 orientation = 0
                 x, y = start_x, start_y
                 previous_blocks = []
 
-                while check_bounds(x, y):
+                while True:
                     next_x, next_y = x + ORIENTATIONS[orientation][0], y + ORIENTATIONS[orientation][1]
 
-                    if (x, y, orientation) in previous_blocks:
-                        infinite_placements += 1
-                        print(f"Block at ({block_x}, {block_y}) causes infinite loop.")
-                        break
-
                     if check_bounds(next_x, next_y): 
-                        if current_map[next_y][next_x] != '#':
+                        if (x, y, orientation) in previous_blocks:
+                            infinite_placements += 1
+                            #print(f"Block at ({block_x}, {block_y}) causes infinite loop.")
+                            break
+                
+                        if map[next_y][next_x] != '#':
                             x, y = next_x, next_y
                         else:
                             previous_blocks.append((x, y, orientation))
