@@ -55,7 +55,7 @@ def part2():
 
                 orientation = 0
                 x, y = start_x, start_y
-                previous_blocks = []
+                previous_blocks = set()
 
                 while True:
                     next_x, next_y = x + ORIENTATIONS[orientation][0], y + ORIENTATIONS[orientation][1]
@@ -69,7 +69,7 @@ def part2():
                         if map[next_y][next_x] != '#':
                             x, y = next_x, next_y
                         else:
-                            previous_blocks.append((x, y, orientation))
+                            previous_blocks.add((x, y, orientation))
                             orientation = (orientation + 1) % 4
                     else:
                         break
