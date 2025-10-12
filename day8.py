@@ -1,4 +1,3 @@
-from itertools import groupby
 def load_data():
     len_x, len_y = 0, 0
     with open('day8.txt', 'r') as f:
